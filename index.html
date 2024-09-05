@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu niver</title>
+    <style>
+        body {
+            background-color: #fffafa;
+            color: #333;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .counter {
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #ffccd5;
+        }
+        .btn {
+            background-color: #ffccd5;
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 1.5em;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn:hover {
+            background-color: #ffb3c6;
+        }
+    </style>
+</head>
+<body>
+    <h1>Feliz Aniversário meu amor!</h1>
+    <p>Sou grato todos os dias por passar mais um aniversário ao seu lado!</p>
+    <p>Te convido a mergulhar em nossas memórias para lembrarmos tantos momentos mágicos que nos trouxeram até aqui!</p>
+    <div class="counter" id="counter"></div>
+    <a href="memories.html" class="btn">Mergulhar</a>
+
+    <script>
+        const startDate = new Date('2022-07-28T00:00:00'); // Data de início do relacionamento
+        setInterval(() => {
+            const now = new Date();
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+            document.getElementById('counter').textContent = 
+                `São ${days} dias, ${hours} horas e ${minutes} minutos juntos`;
+        }, 1000);
+    </script>
+</body>
+</html>

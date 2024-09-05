@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memórias</title>
+    <style>
+        body {
+            background-color: #fffafa;
+            color: #333;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        h3{
+            padding-top: 0;
+        }
+        .card {
+            background-color: #fffcf9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        .btn {
+            background-color: #ffccd5;
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 1.5em;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn:hover {
+            background-color: #ffb3c6;
+        }
+        img {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Nossas Memórias</h3>
+
+    <audio id="backgroundMusic" autoplay></audio>
+    <button class="btn" onclick="showNextMemory()">Próxima Memória</button>
+    <div class="card" id="memoryCard">
+        <img id="memoryImage" src="" alt="Memória">
+        <h2 id="memoryTitle"></h2>
+        <p id="memoryDescription"></p>
+        <p id="memoryDate"></p>
+    </div>
+    
+    <script>
+        const memories = [
+            {
+                image: './img/comendoporai.jpeg',
+                title: 'Comendo docinhos por aí',
+                description: 'Nossos rolês por aí (sempre gastronômicos rs) conhecendo lugares novos!',
+            },
+            {
+                image: './img/conhecendolugares.jpeg',
+                title: 'Conhecendo Lugares...',
+                description: 'Mais um dia conhecendo lugares por SP juntinhos!',
+            },
+            {
+                image: './img/coracaodebolacha.jpeg',
+                title: 'Coração de Bolacha',
+                description: 'Quando ainda estudávamos juntos e fiz um presente artesanal para você!',
+            },
+            {
+                image: './img/diadosnamorados.jpeg',
+                title: 'Dia dos Namorados',
+                description: 'Comemos macarrão para comemorar mais um dia dos namorados juntos! Que nosso amor seja eterno.',
+            },
+            {
+                image: './img/ensinandoatirarfoto.jpeg',
+                title: 'Você me ensinando...',
+                description: 'No dia em que saímos e você precisava de boas fotos, então me ensinou como que eu deveria tirar.',
+            },
+            {
+                image: './img/diafeliz.jpeg',
+                title: 'Um dia alegre!',
+                description: 'Me lembro desse dia, bastante frio e você apertou forte meu braço, senti muita saudade sua no resto daquele dia!',
+            },
+            {
+                image: './img/diamuitofeliz.jpeg',
+                title: 'Um dos nossos primeiros encontros...',
+                description: 'Foi nesse dia que trocamos presentes incríveis e curtimos muito mais um rolê (gastronômico) por SP.',
+            },
+            {
+                image: './img/diasnapraca.jpeg',
+                title: 'Nossos dias na praça!',
+                description: 'Uma foto que representa tantos dias em que ainda estudava de manhã e conseguia te encontrar para almoçarmos juntinhos e depois ficar conversando na pracinha.',
+            },
+            {
+                image: './img/doidos.jpeg',
+                title: 'Do nosso jeitinho!',
+                description: 'Nós doidinhos pegando o trem. Quem vê de fora não entende, mas nossas loucuras se batem em todos os pontos!',
+            },
+            {
+                image: './img/filmequevocequeriamuito.jpeg',
+                title: 'Um dia de filme!',
+                description: 'Você queria muito ver um filme de romance e te fiz companhia, ainda saímos da sala dando pulinhos, igual doidos!',
+            },
+            {
+                image: './img/formatura.jpeg',
+                title: 'A Sua Formatura',
+                description: 'Um dia muito especial para mim, fiquei muito orgulhoso de ver você feliz e conquistando um grande objetivo da sua vida. Sua felicidade é a minha!',
+            },
+            {
+                image: './img/fotodessesdias.jpeg',
+                title: 'Sempre Juntos',
+                description: 'Uma foto desses dias em que estamos sempre juntinhos, crescendo e vivendo em união. E que para sempre seja assim!',
+            },
+            {
+                image: './img/GeamMiguel.jpeg',
+                title: 'Geam Miguel',
+                description: 'Simplesmente Geam Miguel. Não preciso dizer muito sobre ksksksks',
+            },
+            {
+                image: './img/jantar_vo.jpeg',
+                title: 'Jantando com o Vô',
+                description: 'Um dia muito especial pois marcamos de nos encontrar rapidinho e acabamos passando a noite toda juntos e com o Vô comendo pastel!',
+            },
+            {
+                image: './img/maisfestaemcasa.jpeg',
+                title: 'Uma das festas na minha casinha',
+                description: 'Nós curtindo o calorzão com um suquinho de morango que fiz para você!',
+            },
+            {
+                image: './img/meuniver.jpeg',
+                title: 'Meu primeiro Aniversário contigo',
+                description: 'Um dia muito alegre, pois foi minha primeira festa de aniversário com você. Ficamos juntinhos assistindo o Santos e você odiou!',
+            },
+            {
+                image: './img/meuniver2.jpeg',
+                title: 'Meu segundo Aniversário contigo',
+                description: 'Um dos dias mais alegres da minha vida! Um grande frio, é verdade. Mas vários momentos inesquecíveis ao seu lado!',
+            },
+            {
+                image: './img/monte.jpeg',
+                title: 'Monte',
+                description: 'O dia que partimos juntos para o monte, sabia o quanto era importante para você, sou feliz ao seu lado não importa aonde!',
+            },
+            {
+                image: './img/nivercolly.jpeg',
+                title: 'Festona da Colly',
+                description: 'Foi uma das primeiras (se não a primeira) festa da sua família que eu fui. Nós ficamos juntos e curtimos bastante os caldinhos',
+            },
+            {
+                image: './img/nivermaeprimeiravezemcasa.jpeg',
+                title: 'Mais festas!',
+                description: 'Adoramos as nossas festinhas, principalmente no verão, pois tomamos suquinho de morango juntos e ficamos lá fora comendo churras. Mais um dia alegre para nós!',
+            },
+            {
+                image: './img/nivermia.jpeg',
+                title: 'Aniversário da Maria!',
+                description: 'A minha criança favorita do mundo, que Deus proporcionou que tivesse a melhor prima do mundo com o melhor namorado do mundo (eu). Todo dia contigo é uma nova felicidade, nesse dia não foi diferente!',
+            },
+            {
+                image: './img/nosecachorro.jpeg',
+                title: 'Nós + Dog',
+                description: 'Colecionando momentos nossos + Zaza no meu colo!!',
+            },
+            {
+                image: './img/nosfelizes.jpeg',
+                title: 'Nós felizes!',
+                description: 'Você nem imagina como era um desafio para mim ficar sem camisa por aí... Mas contigo me sinto seguro, não poderia ser diferente!',
+            },
+            {
+                image: './img/nosfelizes2.jpeg',
+                title: 'Juntos e Felizes',
+                description: 'Que todos os dias juntos sejam como esse, sorrisos sinceros que só sua presença me proporciona!',
+            },
+            {
+                image: './img/nosfelizesporai.jpeg',
+                title: 'Não importa aonde, não importa quando!',
+                description: 'Foto desses dias no meio da rua, pois o que importa para a gente é a nossa união, do seu lado qualquer lugar é um cenário perfeito para um momento magnífico.',
+            },
+            {
+                image: './img/nosjuntinhos.jpeg',
+                title: 'Nós no seu local favorito do mundo!',
+                description: 'Jamais deixaria de fora nossos momentos no seu habitat natural (ZARAAAAA)',
+            },
+            {
+                image: './img/nossofondue.jpeg',
+                title: 'Nosso Fondue',
+                description: 'Uma noite especial, seria a última vez que íamos nos ver no ano, então fizemos algo diferente (e bem gostoso!)',
+            },
+            {
+                image: './img/nossonamoro.jpeg',
+                title: 'Nosso dia 16!',
+                description: 'Como esquecer do nosso dia! Um dia após o meu acidente, é inesquecível mesmo ksksksks. Brincadeiras a parte foi um dia muito alegre e que me fez sentir que estava no caminho perfeito da minha vida.',
+            },
+            {
+                image: './img/nossosolhares.jpeg',
+                title: 'Nossos Olhares',
+                description: 'Uma foto apenas para representar nossa conexão desde o primeiro segundo. Quando olhei pela primeira vez por dentro desses olhões redondos já sabia que seríamos nós para sempre!',
+            },
+            {
+                image: './img/primeiravezcaqui.jpeg',
+                title: 'Nós comendo em um dos nossos lugares favoritos!',
+                description: 'Curtindo uma refeição delícia no Caqui, que se tornou um dos nossos lugares favoritos. São maravilhosas lembranças por lá!',
+            },
+            {
+                image: './img/primeiroencontro.jpeg',
+                title: 'Nosso primeiro encontro',
+                description: 'A primeira vez, o primeiro contato! Não tem como esquecer desse dia, foram tantas sensações e que nunca mais deixaram de existir, para sempre nós!',
+            },
+            {
+                image: './img/rolecomminhablusa.jpeg',
+                title: 'Você e minhas blusas!',
+                description: 'Nós dando um rolê por aí e você com a minhas blusas que você adora usar!',
+            },
+            {
+                image: './img/segundoencontro.jpeg',
+                title: 'O nosso segundo encontro',
+                description: 'Assistimos minions e comemos panetone. Sua mãe brigou com você pois voltamos tarde, mas foi ótimo para matar a saudade e passar um tempão juntinhos!',
+            },
+            {
+                image: './img/seuniverterraco.jpeg',
+                title: 'Seu Aniversário muito especial!',
+                description: 'Esse foi um dia que ficou marcado na minha memória, você ficou deslumbrada e tentou aproveitar comigo todos os momentos. Pegamos um Uber com cheiro de xixi que fez o dia muito mais engraçado. Faria tudo de novo por você!',
+            },
+            {
+                image: './img/terracoitalia.jpeg',
+                title: 'Nós chegando lá!',
+                description: 'Chegando no terraço itália, ansiosos para conhecer a experiência mais diferente que teríamos conhecido até então. E valeu cada centavo!',
+            },
+            {
+                image: './img/tios.jpeg',
+                title: 'Eu, você e tios!',
+                description: 'Sua family, que sempre me acolheu e me respeitou, e nós curtindo mais uma festinha juntos!',
+            },
+            {
+                image: './img/treinao.jpeg',
+                title: 'Nossa época Fit',
+                description: 'Nossos dois meses FIT que foram muito legais e eu adorei bugar tudo na sua academia fazendo panturras'
+            },
+            
+            // Adicione mais memórias aqui
+        ];
+
+        let displayedMemories = [];
+
+        function showNextMemory() {
+            if (displayedMemories.length === memories.length) {
+                displayedMemories = [];
+            }
+
+            let availableMemories = memories.filter(m => !displayedMemories.includes(m));
+            let memory = availableMemories[Math.floor(Math.random() * availableMemories.length)];
+
+            document.getElementById('memoryImage').src = memory.image;
+            document.getElementById('memoryTitle').textContent = memory.title;
+            document.getElementById('memoryDescription').textContent = memory.description;
+            document.getElementById('memoryDate').textContent = memory.date;
+
+            displayedMemories.push(memory);
+        }
+
+        // Exibir a primeira memória ao carregar a página
+        showNextMemory();
+
+        // Gerenciamento das músicas
+        const musicTracks = [
+            './audio/music1.mp3',
+            './audio/music2.mp3',
+            './audio/music3.mp3'
+        ];
+        let currentTrack = 0;
+
+        const audioElement = document.getElementById('backgroundMusic');
+
+        // Função para tocar a próxima música
+        function playNextTrack() {
+            currentTrack = (currentTrack + 1) % musicTracks.length; // Vai para a próxima música e reinicia ao chegar na última
+            audioElement.src = musicTracks[currentTrack];
+            audioElement.play();
+        }
+
+        // Configura o evento 'ended' para trocar de música automaticamente
+        audioElement.addEventListener('ended', playNextTrack);
+
+        // Toca a primeira música ao carregar a página
+        audioElement.src = musicTracks[currentTrack];
+        audioElement.play();
+    </script>
+</body>
+</html>
