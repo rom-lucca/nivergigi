@@ -44,8 +44,6 @@
 </head>
 <body>
     <h3>Nossas Memórias</h3>
-
-    <button class="btn" id="playButton">▶️</button>
     
     <audio id="backgroundMusic" autoplay></audio>
     
@@ -268,36 +266,6 @@
 
         // Exibir a primeira memória ao carregar a página
         showNextMemory();
-
-        // Gerenciamento das músicas
-        const musicTracks = [
-            'music1.mp3',
-            'music2.mp3',
-            'music3.mp3'
-        ];
-        let currentTrack = 0;
-
-        const audioElement = document.getElementById('backgroundMusic');
-
-        // Ajustar volume (0.0 é mudo e 1.0 é volume máximo)
-        audioElement.volume = 0.2;  // Ajuste o volume conforme necessário
-
-        // Função para tocar a próxima música
-        function playNextTrack() {
-            currentTrack = (currentTrack + 1) % musicTracks.length; // Vai para a próxima música e reinicia ao chegar na última
-            audioElement.src = musicTracks[currentTrack];
-            audioElement.play();
-        }
-
-        // Configura o evento 'ended' para trocar de música automaticamente
-        audioElement.addEventListener('ended', playNextTrack);
-
-        // Adicionar evento de clique no botão para iniciar a música no Safari
-        document.getElementById('playButton').addEventListener('click', function () {
-            audioElement.src = musicTracks[currentTrack];
-            audioElement.play();
-            document.getElementById('playButton').style.display = 'none';  // Esconde o botão após o clique
-        });
     </script>
 </body>
 </html>
